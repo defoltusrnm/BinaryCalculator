@@ -45,7 +45,8 @@
                        Margin="10"/>
             <Button Grid.Column="0"
                     Grid.Row="1"
-                    Content="CE"/>
+                    Content="CE"
+                    Command="{Binding DeleteLastInputCommand}"/>
             <Button Grid.Column="1"
                     Grid.Row="1"
                     Content="1"
@@ -64,7 +65,8 @@
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
             <Button Grid.Column="0"
                     Grid.Row="2"
-                    Content="ON/AC"/>
+                    Content="C"
+                    Command="{Binding ClearResultCommand}"/>
             <Button Grid.Column="1"
                     Grid.Row="2"
                     Content="0"
@@ -72,7 +74,8 @@
                     CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
             <Button Grid.Column="3"
                     Grid.Row="2"
-                    Content="="/>
+                    Content="="
+                    Command="{Binding CalculateCommand}"/>
         </Grid>
     </Viewbox>
 </Window>

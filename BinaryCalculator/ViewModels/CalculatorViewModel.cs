@@ -24,8 +24,19 @@ namespace BinaryCalculator.Application.ViewModels
             }
         }
 
-        public ICommand InsertOperatorCommand => new ActionCommand(OnInsertNumberCommandExecuted, 
-                                                                   p => !string.IsNullOrEmpty(Result) && 
+        public ICommand InsertOperatorCommand => new ActionCommand(OnInsertNumberCommandExecuted,
+                                                                   p => !string.IsNullOrEmpty(Result) &&
                                                                         !(Result.Contains('+') || Result.Contains('-')));
+
+        public ICommand DeleteLastInputCommand => new ActionCommand(p => Result = Result.Remove(Result.Length - 1), p => !string.IsNullOrEmpty(Result));
+
+        public ICommand ClearResultCommand => new ActionCommand(p => Result = "", p => !string.IsNullOrEmpty(Result));
+
+        public ICommand CalculateCommand => new ActionCommand(OnCalculateCommandExecuted, p => !string.IsNullOrEmpty(Result));
+
+        private void OnCalculateCommandExecuted(object? parameter)
+        {
+
+        }
     }
 }
