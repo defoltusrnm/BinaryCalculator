@@ -13,11 +13,57 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Binary Calculator" 
-        Height="200" 
-        Width="300">
-    <DockPanel LastChildFill="True">
-        <StackPanel>
-            <TextBox materialDesign:HintAssist.Hint="Example: 1 + 2, 1+2, 1 *2"/>
-        </StackPanel>
-    </DockPanel>
+        MinHeight="200" 
+        MinWidth="300">
+    <Viewbox Stretch="Uniform">
+        <Grid VerticalAlignment="Stretch"
+          HorizontalAlignment="Stretch">
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="../Resources/ButtonStyle.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="123123123" 
+                       Grid.Column="0"
+                       Grid.ColumnSpan="4"
+                       Grid.Row="0"
+                       HorizontalAlignment="Right"
+                       Margin="10"/>
+            <Button Grid.Column="0"
+                    Grid.Row="1"
+                    Content="CE"/>
+            <Button Grid.Column="1"
+                    Grid.Row="1"
+                    Content="1"/>
+            <Button Grid.Column="3"
+                    Grid.Row="1"
+                    Content="-"/>
+            <Button Grid.Column="2"
+                    Grid.Row="1"
+                    Grid.RowSpan="2"
+                    Content="+"/>
+            <Button Grid.Column="0"
+                    Grid.Row="2"
+                    Content="ON/AC"/>
+            <Button Grid.Column="1"
+                    Grid.Row="2"
+                    Content="0"/>
+            <Button Grid.Column="3"
+                    Grid.Row="2"
+                    Content="="/>
+        </Grid>
+    </Viewbox>
 </Window>
