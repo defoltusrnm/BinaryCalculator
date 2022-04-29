@@ -4,4 +4,9 @@
            BasedOn="{StaticResource MaterialDesignFlatButton}">
         <Setter Property="Margin" Value="10"/>
     </Style>
+    <Style TargetType="{x:Type Button}"
+           x:Key="RedButtonStyle"
+           BasedOn="{StaticResource MaterialDesignFlatAccentButton}">
+        <Setter Property="Margin" Value="10"/>
+    </Style>
 </ResourceDictionary>

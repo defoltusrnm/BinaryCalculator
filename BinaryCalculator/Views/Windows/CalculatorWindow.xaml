@@ -1,9 +1,8 @@
 ﻿<Window x:Class="BinaryCalculator.Application.Views.Windows.CalculatorWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -15,6 +14,9 @@
         Title="Binary Calculator" 
         MinHeight="200" 
         MinWidth="300"
+        Width="450"
+        Height="300"
+        WindowStartupLocation="CenterScreen"
         DataContext="{Binding Source={StaticResource Locator}, Path=CalculatorViewModel}">
     <Viewbox Stretch="Fill">
         <Grid VerticalAlignment="Stretch"
@@ -23,6 +25,7 @@
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="../Resources/ButtonStyle.xaml"/>
+                        <ResourceDictionary Source="../Resources/WindowStyle.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </Grid.Resources>
@@ -46,7 +49,8 @@
             <Button Grid.Column="0"
                     Grid.Row="1"
                     Content="CE"
-                    Command="{Binding DeleteLastInputCommand}"/>
+                    Command="{Binding DeleteLastInputCommand}"
+                    Style="{StaticResource RedButtonStyle}"/>
             <Button Grid.Column="1"
                     Grid.Row="1"
                     Content="1"
@@ -66,7 +70,8 @@
             <Button Grid.Column="0"
                     Grid.Row="2"
                     Content="C"
-                    Command="{Binding ClearResultCommand}"/>
+                    Command="{Binding ClearResultCommand}"
+                    Style="{StaticResource RedButtonStyle}"/>
             <Button Grid.Column="1"
                     Grid.Row="2"
                     Content="0"

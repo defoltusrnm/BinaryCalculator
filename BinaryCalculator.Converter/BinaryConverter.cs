@@ -28,6 +28,9 @@ namespace BinaryCalculator.Converters
 
         public string ConvertTo(long value)
         {
+            int sign = Math.Sign(value);
+            value = Math.Abs(value);
+            
             var binary = string.Empty;
             while (value > 0)
             {
@@ -35,7 +38,7 @@ namespace BinaryCalculator.Converters
                 value = value >> Mask;
             }
 
-            return binary;
+            return (sign == -1 ? '-' : '\0') + binary;
         }
     }
 }
