@@ -1,4 +1,6 @@
 ﻿using BinaryCalculator.Application.ViewModels;
+using BinaryCalculator.Converters;
+using BinaryCalculator.Converters.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -6,14 +8,16 @@ namespace BinaryCalculator.Application.Infrastructure
 {
     public class Locator
     {
-        private readonly IServiceCollection _services;
+        private readonly IServiceProvider _provider;
 
         public Locator()
         {
-            _services = new ServiceCollection().AddScoped<CalculatorViewModel>();
+            var services = new ServiceCollection().AddScoped<IConverter, BinaryConverter>()
+                                                  .AddScoped<CalculatorViewModel>();
+            _provider = services.BuildServiceProvider();
         }
 
-        public CalculatorViewModel CalculatorViewModel => _services.BuildServiceProvider().GetService<CalculatorViewModel>() 
+        public CalculatorViewModel CalculatorViewModel => _provider.GetService<CalculatorViewModel>() 
             ?? throw new ArgumentNullException(nameof(CalculatorViewModel));
     }
 }
