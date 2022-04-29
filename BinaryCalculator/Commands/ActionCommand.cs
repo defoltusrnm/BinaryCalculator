@@ -19,7 +19,7 @@ namespace BinaryCalculator.Application.Commands
             _execute = execute;
         }
 
-        public override bool CanExecute(object? parameter) => _canExecute?.Invoke(parameter) ?? false;
+        public override bool CanExecute(object? parameter) => _canExecute?.Invoke(parameter) ?? true;
 
         public override void Execute(object? parameter) => _execute?.Invoke(parameter);
     }

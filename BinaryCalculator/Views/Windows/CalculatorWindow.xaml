@@ -14,10 +14,11 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         Title="Binary Calculator" 
         MinHeight="200" 
-        MinWidth="300">
-    <Viewbox Stretch="Uniform">
+        MinWidth="300"
+        DataContext="{Binding Source={StaticResource Locator}, Path=CalculatorViewModel}">
+    <Viewbox Stretch="Fill">
         <Grid VerticalAlignment="Stretch"
-          HorizontalAlignment="Stretch">
+              HorizontalAlignment="Stretch">
             <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -36,7 +37,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="123123123" 
+            <TextBlock Text="{Binding Result, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                        Grid.Column="0"
                        Grid.ColumnSpan="4"
                        Grid.Row="0"
@@ -47,20 +48,28 @@
                     Content="CE"/>
             <Button Grid.Column="1"
                     Grid.Row="1"
-                    Content="1"/>
+                    Content="1"
+                    Command="{Binding InsertNumberCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
             <Button Grid.Column="3"
                     Grid.Row="1"
-                    Content="-"/>
+                    Content="-"
+                    Command="{Binding InsertOperatorCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
             <Button Grid.Column="2"
                     Grid.Row="1"
                     Grid.RowSpan="2"
-                    Content="+"/>
+                    Content="+"
+                    Command="{Binding InsertOperatorCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
             <Button Grid.Column="0"
                     Grid.Row="2"
                     Content="ON/AC"/>
             <Button Grid.Column="1"
                     Grid.Row="2"
-                    Content="0"/>
+                    Content="0"
+                    Command="{Binding InsertNumberCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
             <Button Grid.Column="3"
                     Grid.Row="2"
                     Content="="/>

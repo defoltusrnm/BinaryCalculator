@@ -1,9 +1,11 @@
 ﻿<Application x:Class="BinaryCalculator.Application.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:locator="clr-namespace:BinaryCalculator.Application.Infrastructure"
              StartupUri="Views/Windows/CalculatorWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
+            <locator:Locator x:Key="Locator"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
