@@ -73,8 +73,8 @@ namespace BinaryCalculator.Application.ViewModels
                     _state = States.FirstOperandInputed;
                     break;
                 case States.Calculated:
-                    _secondOperand = Output.Clone() as string ?? string.Empty;
-                    _state = States.SecondOperandInputed;
+                    _firstOperand = Output.Clone() as string ?? string.Empty;
+                    _state = States.FirstOperandInputed;
                     break;
             }
         }
@@ -83,12 +83,19 @@ namespace BinaryCalculator.Application.ViewModels
 
         private void OnCalculateCommandExecuted()
         {
-            if (_state == States.OperatorInputed || _state == States.SecondOperandInputed || _state == States.Calculated)
+            switch (_state)
             {
-                _secondOperand = Output.Clone() as string ?? string.Empty;
-                Output = _calculator.Calculate(_firstOperand, _secondOperand, _operator);
-                
-                _state = States.Calculated;
+                case States.OperatorInputed:
+                    _secondOperand = Output.Clone() as string ?? string.Empty;
+                    _state = States.SecondOperandInputed;
+                    goto case States.SecondOperandInputed;
+                case States.SecondOperandInputed:
+                    Output = _calculator.Calculate(_firstOperand, _secondOperand, _operator);
+                    _state = States.Calculated;
+                    break;
+                case States.Calculated:
+                    Output = _calculator.Calculate(Output, _secondOperand, _operator);
+                    break;
             }
         }
     }
