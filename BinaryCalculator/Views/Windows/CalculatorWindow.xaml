@@ -3,6 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -23,6 +24,10 @@
               HorizontalAlignment="Stretch">
             <Grid.Resources>
                 <ResourceDictionary>
+                    <system:String x:Key="One">1</system:String>
+                    <system:String x:Key="Zero">0</system:String>
+                    <system:Char x:Key="Plus">+</system:Char>
+                    <system:Char x:Key="Minus">-</system:Char>
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="../Resources/ButtonStyle.xaml"/>
                     </ResourceDictionary.MergedDictionaries>
@@ -48,24 +53,33 @@
             <Button Grid.Column="0"
                     Grid.Row="1"
                     Content="CE"
-                    Style="{StaticResource RedButtonStyle}"/>
+                    Style="{StaticResource RedButtonStyle}"
+                    Command="{Binding ResetCalcualtionCommand}"/>
             <Button Grid.Column="1"
                     Grid.Row="1"
-                    Content="1"/>
+                    Content="{StaticResource One}"
+                    Command="{Binding InsertNumberCommand}"
+                    CommandParameter="{StaticResource One}"/>
             <Button Grid.Column="3"
                     Grid.Row="1"
-                    Content="-"/>
+                    Content="{StaticResource Minus}"
+                    Command="{Binding AddOperatorCommand}"
+                    CommandParameter="{StaticResource Minus}"/>
             <Button Grid.Column="2"
                     Grid.Row="1"
                     Grid.RowSpan="2"
-                    Content="+"/>
+                    Content="{StaticResource Plus}"
+                    Command="{Binding AddOperatorCommand}"
+                    CommandParameter="{StaticResource Plus}"/>
             <Button Grid.Column="0"
                     Grid.Row="2"
                     Content="C"
                     Style="{StaticResource RedButtonStyle}"/>
             <Button Grid.Column="1"
                     Grid.Row="2"
-                    Content="0"/>
+                    Content="{StaticResource Zero}"
+                    Command="{Binding InsertNumberCommand}"
+                    CommandParameter="{StaticResource Zero}"/>
             <Button Grid.Column="3"
                     Grid.Row="2"
                     Content="="/>

@@ -4,6 +4,19 @@ using System.Windows.Input;
 
 namespace BinaryCalculator.Application.Commands.Base
 {
+    public abstract class Command : ICommand
+    {
+        public event EventHandler? CanExecuteChanged
+        {
+            add => CommandManager.RequerySuggested += value;
+            remove => CommandManager.RequerySuggested -= value;
+        }
+
+        public abstract bool CanExecute(object? parameter);
+
+        public abstract void Execute(object? parameter);
+    }
+
     public abstract class Command<TParam> : ICommand<TParam>
     {
         public event EventHandler? CanExecuteChanged
@@ -19,19 +32,21 @@ namespace BinaryCalculator.Application.Commands.Base
                 return CanExecute(param);
             }
 
-            throw new ArgumentException($"parameter is not {typeof(TParam).Name}");
+            return CanExecute(default);
         }
 
-        public abstract bool CanExecute(TParam param);
+        public abstract bool CanExecute(TParam? param);
 
         void ICommand.Execute(object? parameter)
         {
             if (parameter is TParam param)
             {
                 Execute(param);
+                
+                return;
             }
 
-            throw new ArgumentException($"parameter is not {typeof(TParam).Name}");
+            Execute(default);
         }
 
         public abstract void Execute(TParam? param);
