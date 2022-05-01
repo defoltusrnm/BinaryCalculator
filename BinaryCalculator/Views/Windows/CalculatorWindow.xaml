@@ -54,7 +54,7 @@
                     Grid.Row="1"
                     Content="CE"
                     Style="{StaticResource RedButtonStyle}"
-                    Command="{Binding ResetCalcualtionCommand}"/>
+                    Command="{Binding ClearLastInputCommand}"/>
             <Button Grid.Column="1"
                     Grid.Row="1"
                     Content="{StaticResource One}"
@@ -74,7 +74,8 @@
             <Button Grid.Column="0"
                     Grid.Row="2"
                     Content="C"
-                    Style="{StaticResource RedButtonStyle}"/>
+                    Style="{StaticResource RedButtonStyle}"
+                    Command="{Binding ResetAllCommand}"/>
             <Button Grid.Column="1"
                     Grid.Row="2"
                     Content="{StaticResource Zero}"

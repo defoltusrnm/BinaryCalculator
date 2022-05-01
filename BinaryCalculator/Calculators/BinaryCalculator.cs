@@ -22,7 +22,7 @@ namespace BinaryCalculator.Application.Calculators
 
             if (result < 0)
             {
-                return "Error: negative numbers are not supported";
+                throw new ArgumentException("Error: negative numbers are not supported");
             }
 
             return Convert.ToString(result, 2);
