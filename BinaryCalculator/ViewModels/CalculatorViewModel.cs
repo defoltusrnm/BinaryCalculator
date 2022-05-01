@@ -28,30 +28,6 @@ namespace BinaryCalculator.Application.ViewModels
 
         private void OnInputNumberCommandExecuted(string? parameter)
         {
-            //if (_state == States.SecondOperandInputed)
-            //{
-            //    _state = States.OperatorInputed;
-            //    _firstOperand = Output.Clone() as string ?? string.Empty;
-            //    Output = "";
-            //}
-            
-            //if (_state == States.FirstOperandInputed)
-            //{
-            //    _state = States.OperatorInputed;
-            //    Output = "";
-            //}
-
-            //if (_state == States.Calculated)
-            //{
-            //    _state = States.UserInput;
-            //    Output = "";
-            //}
-            
-            //if (_state == States.UserInput || _state == States.OperatorInputed)
-            //{
-            //    Output += parameter;
-            //}
-
             switch (_state)
             {
                 case States.SecondOperandInputed:
@@ -81,34 +57,25 @@ namespace BinaryCalculator.Application.ViewModels
         private void OnInputOperatorCommandExecuted(char parameter)
         {
             _operator = parameter;
-            
-            if (_state == States.UserInput)
+            switch (_state)
             {
-                _firstOperand = Output.Clone() as string ?? string.Empty;
-                
-                _state = States.FirstOperandInputed;
-            }
-
-            if (_state == States.OperatorInputed)
-            {
-                _secondOperand = Output.Clone() as string ?? string.Empty;
-
-                _state = States.SecondOperandInputed;
-            }
-
-            if (_state == States.SecondOperandInputed)
-            {
-                _firstOperand = _calculator.Calculate(_firstOperand, Output, _operator);
-
-                Output = _firstOperand.Clone() as string ?? string.Empty;
-                _state = States.FirstOperandInputed;
-            }
-
-            if (_state == States.Calculated)
-            {
-                _secondOperand = Output.Clone() as string ?? string.Empty;
-
-                _state = States.SecondOperandInputed;
+                case States.UserInput:
+                    _firstOperand = Output.Clone() as string ?? string.Empty;
+                    _state = States.FirstOperandInputed;
+                    break;
+                case States.OperatorInputed:
+                    _secondOperand = Output.Clone() as string ?? string.Empty;
+                    _state = States.SecondOperandInputed;
+                    goto case States.SecondOperandInputed;
+                case States.SecondOperandInputed:
+                    _firstOperand = _calculator.Calculate(_firstOperand, Output, _operator);
+                    Output = _firstOperand.Clone() as string ?? string.Empty;
+                    _state = States.FirstOperandInputed;
+                    break;
+                case States.Calculated:
+                    _secondOperand = Output.Clone() as string ?? string.Empty;
+                    _state = States.SecondOperandInputed;
+                    break;
             }
         }
 
