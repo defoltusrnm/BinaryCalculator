@@ -1,4 +1,6 @@
-﻿using BinaryCalculator.Application.ViewModels;
+﻿using BinaryCalculator.Application.Calculators;
+using BinaryCalculator.Application.Calculators.Interfaces;
+using BinaryCalculator.Application.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -10,7 +12,8 @@ namespace BinaryCalculator.Application.Infrastructure
 
         public Locator()
         {
-            var services = new ServiceCollection().AddScoped<CalculatorViewModel>();
+            var services = new ServiceCollection().AddScoped<ICalculator, Calculators.BinaryCalculator>()
+                                                  .AddScoped<CalculatorViewModel>();
             _provider = services.BuildServiceProvider();
         }
 

@@ -58,18 +58,18 @@
             <Button Grid.Column="1"
                     Grid.Row="1"
                     Content="{StaticResource One}"
-                    Command="{Binding InsertNumberCommand}"
+                    Command="{Binding InputNumberCommand}"
                     CommandParameter="{StaticResource One}"/>
             <Button Grid.Column="3"
                     Grid.Row="1"
                     Content="{StaticResource Minus}"
-                    Command="{Binding AddOperatorCommand}"
+                    Command="{Binding InputOperatorCommand}"
                     CommandParameter="{StaticResource Minus}"/>
             <Button Grid.Column="2"
                     Grid.Row="1"
                     Grid.RowSpan="2"
                     Content="{StaticResource Plus}"
-                    Command="{Binding AddOperatorCommand}"
+                    Command="{Binding InputOperatorCommand}"
                     CommandParameter="{StaticResource Plus}"/>
             <Button Grid.Column="0"
                     Grid.Row="2"
@@ -78,11 +78,12 @@
             <Button Grid.Column="1"
                     Grid.Row="2"
                     Content="{StaticResource Zero}"
-                    Command="{Binding InsertNumberCommand}"
+                    Command="{Binding InputNumberCommand}"
                     CommandParameter="{StaticResource Zero}"/>
             <Button Grid.Column="3"
                     Grid.Row="2"
-                    Content="="/>
+                    Content="="
+                    Command="{Binding CalculateCommand}"/>
         </Grid>
     </Viewbox>
 </Window>
