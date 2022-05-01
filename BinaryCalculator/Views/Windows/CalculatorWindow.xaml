@@ -39,7 +39,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="{Binding Result, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            <TextBlock Text="{Binding Output, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                        Grid.Column="0"
                        Grid.ColumnSpan="4"
                        Grid.Row="0"
@@ -48,38 +48,27 @@
             <Button Grid.Column="0"
                     Grid.Row="1"
                     Content="CE"
-                    Command="{Binding DeleteLastInputCommand}"
                     Style="{StaticResource RedButtonStyle}"/>
             <Button Grid.Column="1"
                     Grid.Row="1"
-                    Content="1"
-                    Command="{Binding InsertNumberCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+                    Content="1"/>
             <Button Grid.Column="3"
                     Grid.Row="1"
-                    Content="-"
-                    Command="{Binding InsertOperatorCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+                    Content="-"/>
             <Button Grid.Column="2"
                     Grid.Row="1"
                     Grid.RowSpan="2"
-                    Content="+"
-                    Command="{Binding InsertOperatorCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+                    Content="+"/>
             <Button Grid.Column="0"
                     Grid.Row="2"
                     Content="C"
-                    Command="{Binding ClearResultCommand}"
                     Style="{StaticResource RedButtonStyle}"/>
             <Button Grid.Column="1"
                     Grid.Row="2"
-                    Content="0"
-                    Command="{Binding InsertNumberCommand}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
+                    Content="0"/>
             <Button Grid.Column="3"
                     Grid.Row="2"
-                    Content="="
-                    Command="{Binding CalculateCommand}"/>
+                    Content="="/>
         </Grid>
     </Viewbox>
 </Window>
