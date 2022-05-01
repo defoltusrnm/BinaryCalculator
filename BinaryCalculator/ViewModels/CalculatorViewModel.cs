@@ -28,25 +28,55 @@ namespace BinaryCalculator.Application.ViewModels
 
         private void OnInputNumberCommandExecuted(string? parameter)
         {
-            if (_state == States.FirstOperandInputed)
-            {
-                _state = States.OperatorInputed;
-                Output = "";
-            }
-
-            if (_state == States.Calculated)
-            {
-                _state = States.UserInput;
-                Output = "";
-            }
+            //if (_state == States.SecondOperandInputed)
+            //{
+            //    _state = States.OperatorInputed;
+            //    _firstOperand = Output.Clone() as string ?? string.Empty;
+            //    Output = "";
+            //}
             
-            if (_state == States.UserInput || _state == States.OperatorInputed)
+            //if (_state == States.FirstOperandInputed)
+            //{
+            //    _state = States.OperatorInputed;
+            //    Output = "";
+            //}
+
+            //if (_state == States.Calculated)
+            //{
+            //    _state = States.UserInput;
+            //    Output = "";
+            //}
+            
+            //if (_state == States.UserInput || _state == States.OperatorInputed)
+            //{
+            //    Output += parameter;
+            //}
+
+            switch (_state)
             {
-                Output += parameter;
+                case States.SecondOperandInputed:
+                    _state = States.OperatorInputed;
+                    _firstOperand = Output.Clone() as string ?? string.Empty;
+                    Output = "";
+                    goto case States.OperatorInputed;
+                case States.FirstOperandInputed:
+                    _state = States.OperatorInputed;
+                    Output = "";
+                    goto case States.OperatorInputed;
+                case States.Calculated:
+                    _state = States.UserInput;
+                    Output = "";
+                    goto case States.UserInput;
+                case States.OperatorInputed:
+                    Output += parameter;
+                    break;
+                case States.UserInput:
+                    Output += parameter;
+                    break;
             }
         }
 
-        public ICommand<char> InputOperatorCommand => new ActionCommand<char>(OnInputOperatorCommandExecuted);
+        public ICommand<char> InputOperatorCommand => new ActionCommand<char>(OnInputOperatorCommandExecuted, p => !string.IsNullOrEmpty(Output));
 
         private void OnInputOperatorCommandExecuted(char parameter)
         {
@@ -59,7 +89,7 @@ namespace BinaryCalculator.Application.ViewModels
                 _state = States.FirstOperandInputed;
             }
 
-            if (_state == States.OperatorInputed || _state == States.Calculated)
+            if (_state == States.OperatorInputed)
             {
                 _secondOperand = Output.Clone() as string ?? string.Empty;
 
@@ -73,13 +103,20 @@ namespace BinaryCalculator.Application.ViewModels
                 Output = _firstOperand.Clone() as string ?? string.Empty;
                 _state = States.FirstOperandInputed;
             }
+
+            if (_state == States.Calculated)
+            {
+                _secondOperand = Output.Clone() as string ?? string.Empty;
+
+                _state = States.SecondOperandInputed;
+            }
         }
 
         public ICommand CalculateCommand => new ActionCommand(OnCalculateCommandExecuted);
 
         private void OnCalculateCommandExecuted()
         {
-            if (_state == States.OperatorInputed || _state == States.SecondOperandInputed)
+            if (_state == States.OperatorInputed || _state == States.SecondOperandInputed || _state == States.Calculated)
             {
                 _secondOperand = Output.Clone() as string ?? string.Empty;
                 Output = _calculator.Calculate(_firstOperand, _secondOperand, _operator);
